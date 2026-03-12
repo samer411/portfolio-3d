@@ -37871,24 +37871,24 @@ class lM {
 }
 const cM = [
   {
-    name: "web development",
+    name: "Frontend",
+    width: "95%",
+  },
+  {
+    name: "React & Angular",
     width: "90%",
   },
   {
-    name: "app devlopment",
-    width: "55%",
+    name: "JS / TS",
+    width: "85%",
   },
   {
-    name: "graphic design",
-    width: "90%",
+    name: "Three.js & WebGL",
+    width: "70%",
   },
   {
-    name: "frontend",
-    width: "80%",
-  },
-  {
-    name: "backend",
-    width: "75%",
+    name: "Responsive Design",
+    width: "95%",
   },
 ];
 class hM {
