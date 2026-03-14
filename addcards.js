@@ -1,69 +1,14 @@
 const oM = [
-    {
-      id: 0,
-      name: "Project Hub",
-      description: "Coffee Shop Website",
-      image: "images/projects/projecthub.png",
-      tags: ["javascript", "html", "css", "ui"],
-      liveview: "https://projecthubb.vercel.app/",
-      alt: "Coffee Shop Website",
-    },
-    {
-      id: 1,
-      name: "krushigram",
-      description:
-        "Krushigram is an e-commerce platform for farmers, developed during a hackathon at DA-IICT.It aims to empower farmers through fair trade.",
-      image: "images/projects/krushigram.png",
-      tags: ["javascript", "html", "css", "ui"],
-      liveview: "https://krushigram.vercel.app/",
-      alt: "Coffee Shop Website",
-    },
-    {
-      id: 2,
-      name: "Study Buddy",
-      description: "LMS for teaching assistant",
-      image: "images/projects/studybuddy.jpeg",
-      tags: ["javascript", "react", "mongodb", "express"],
-      liveview: "https://studybuddyy.vercel.app/",
-      alt: "Digital Marketing Agency",
-    },
-    {
-      id: 3,
-      name: "Open Talk",
-      description: "Affiliate Marketing and earning Website",
-      image: "images/projects/opentalk.jpeg",
-      tags: ["react", "mongodb", "express"],
-      liveview: "https://opentalk1.netlify.app/",
-      alt: "Affiliate Marketing and earning Website",
-    },
-    {
-      id: 4,
-      name: "Randomizer",
-      description: "Fitness Institute",
-      image: "images/projects/randomizer.jpg",
-      tags: ["html", "css", "javascript", "react", "game"],
-      liveview: "https://randomizerr.vercel.app/",
-      alt: "Fitness Institute",
-    },
-    {
-      id: 5,
-      name: "Crypto Tracker",
-      description: "A cryptocurrency tracking dashboard",
-      image: "images/projects/cryptotracker.png",
-      tags: ["react", "javascript", "api"],
-      liveview: "https://cryptotrackerr.vercel.app/",
-      alt: "Crypto Tracker Dashboard",
-    },
-    {
-      id: 6,
-      name: "Weather App",
-      description: "Real-time weather application",
-      image: "images/projects/weatherapp.png",
-      tags: ["javascript", "html", "css", "api"],
-      liveview: "https://weatherappp.vercel.app/",
-      alt: "Real-time Weather Application",
-    },
-  ];
+  {
+    id: 0,
+    name: "Project Coca: Industrial Monitoring & Planning Dashboard",
+    description: "Coca is a modern, real-time industrial monitoring and production planning platform designed to provide manufacturing facilities with actionable insights into operations, machine performance, and resource allocation.",
+    image: "images/projects/coca.png",
+    tags: ["angular", "firebase", "javascript", "ui"],
+    liveview: "#",
+    alt: "Industrial Monitoring Dashboard",
+  },
+];
   
   class lM {
     constructor() {

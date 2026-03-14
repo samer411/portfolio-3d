@@ -37500,14 +37500,14 @@ class rM {
       backButton: document.getElementById("work-back-button"),
       nextButton: document.getElementById("work-next-button"),
     });
-    he(this, "currentItemIndex", 2);
-    he(this, "itemsAreMoving", !0);
     (this.experience = new ye()),
       (this.gestures = this.experience.gestures),
       (this.render = this.experience.ui.work.render),
       (this.sounds = this.experience.sounds),
       (this.scroll = this.experience.ui.scroll),
       (this.sizes = this.experience.sizes),
+      (this.currentItemIndex = 4), // Center the first project initially
+      (this.itemsAreMoving = !0),
       this.addButtonEventListeners(),
       this.initSwipes(),
       this.updatePositions(!0),
@@ -37516,7 +37516,7 @@ class rM {
       this.sizes.on("landscape", () => this.onOrientationChange());
   }
   onOrientationChange() {
-    (this.currentItemIndex = 2), this.updatePositions();
+    (this.currentItemIndex = 4), this.updatePositions();
   }
   addButtonEventListeners() {
     this.domElements.backButton.addEventListener("click", () => {
@@ -37553,7 +37553,7 @@ class rM {
       (e == "right" ? this.moveForward() : this.moveBack());
   }
   moveBack() {
-    this.currentItemIndex != 4 &&
+    this.currentItemIndex < 4 &&
       !this.itemsAreMoving &&
       document
         .getElementById("work-item-0")
@@ -37561,7 +37561,7 @@ class rM {
       (this.currentItemIndex++, this.updatePositions());
   }
   moveForward() {
-    this.currentItemIndex != 0 &&
+    this.currentItemIndex > 4 - (this.render.items.length - 1) &&
       !this.itemsAreMoving &&
       document
         .getElementById("work-item-0")
@@ -37580,88 +37580,56 @@ class rM {
     (!this.itemsAreMoving || e) &&
       (this.render.items.forEach((t) => {
         const n = this.render.items.indexOf(t);
-        (document.getElementById("work-item-" + t.id).style =
-          this.positionStyles[n + this.currentItemIndex]),
-          n + this.currentItemIndex != 4
-            ? document
-                .getElementById("work-item-" + t.id)
-                .classList.add("work-inactive-item-container")
-            : document
-                .getElementById("work-item-" + t.id)
-                .classList.remove("work-inactive-item-container");
+        const el = document.getElementById("work-item-" + t.id);
+        if (el) {
+            el.style = this.positionStyles[n + this.currentItemIndex];
+            n + this.currentItemIndex != 4
+              ? el.classList.add("work-inactive-item-container")
+              : el.classList.remove("work-inactive-item-container");
+        }
       }),
       (this.itemsAreMoving = !0),
       P.delayedCall(0.5, () => (this.itemsAreMoving = !1)),
       this.updateNavigation());
   }
   updateNavigation() {
-    this.currentItemIndex == 0
-      ? (this.domElements.nextButton.classList.add(
-          "work-disabled-navigation-button"
-        ),
-        this.experience.ui.hoverIcon.setupDefault())
-      : this.currentItemIndex == 4
+    this.currentItemIndex == 4
       ? (this.domElements.backButton.classList.add(
           "work-disabled-navigation-button"
         ),
         this.experience.ui.hoverIcon.setupDefault())
-      : (this.domElements.nextButton.classList.remove(
+      : this.domElements.backButton.classList.remove(
+          "work-disabled-navigation-button"
+        );
+
+    this.currentItemIndex == 4 - (this.render.items.length - 1)
+      ? (this.domElements.nextButton.classList.add(
           "work-disabled-navigation-button"
         ),
-        this.domElements.backButton.classList.remove(
+        this.experience.ui.hoverIcon.setupDefault())
+      : this.domElements.nextButton.classList.remove(
           "work-disabled-navigation-button"
-        ));
+        );
   }
 }
 const oM = [
     {
       id: 0,
-      name: "the iqic",
-      description: "Delivered a professional freelance project for a quality inspection company, creating a comprehensive business website",
-      image: "images/projects/theiqic.jpeg",
-      tags: ["javascript", "html", "css", "freelance"],
-      liveview: "https://theiqic.com/",
-      // github: "https://github.com/satvik9373/coffee-website-.git",
-      alt: "Coffee Shop Website",
+      name: "Coca Cola",
+      description: "A premium digital experience for Coca Cola, featuring seamless interactions and a high-performance modern web interface.",
+      image: "images/projects/cocacola_logo.png",
+      tags: ["angular", "firebase", "javascript", "ui", "freelance"],
+      liveview: "https://coca-zeta.vercel.app/",
+      alt: "Coca Cola Project Preview",
     },
     {
       id: 1,
-      name: "venchers campaign",
-      description: "a block-based photo sharing system inspired by the historic Million Dollar Homepage concept",
-      image: "images/projects/krushigram.png",
-      tags: ["react", "express", "multer", "googleAuth","Cloudinery"],
-      liveview: "https://venchers-campaign.vercel.app/",
-      alt: "venchers campaign",
-    },
-    {
-      id: 2,
-      name: "vapor ui",
-      description: "UI component library featuring 20+ reusable components, text animations, background animations, loading page elements, and interactive UI element ",
-      image: "images/projects/vaporui.jpeg",
-      tags: ["javascript", "react", "ui","framer"],
-      liveview: "https://vapor-ui.vercel.app/",
-      // github: "https://github.com/satvik9373/yoga-class.git",
-      alt: "Fitness Institute",
-    },
-    {
-      id: 3,
-      name: "Quick Labs",
-      description: "Quick labs is an LMS developed for teaching assistants at my university to provide lab solutions, manage materials, and support students.",
-      image: "images/projects/studybuddy.jpeg",
-      tags: ["javascript", "react", "mongodb", ""],
-      liveview: "http://quicklabs.fun/",
-      // github: "https://github.com/satvik9373/Think-Beyond-Marketing",
-      alt: "Digital Marketing Agency",
-    },
-    {
-      id: 4,
-      name: "Open Talk",
-      description: "Open Talk is a platform where people can share their achievements and hacks, allowing others to like or dislike them without needing an account.",
-      image: "images/projects/opentalk.jpeg",
-      tags: ["react", "mongodb", "express"],
-      liveview: "https://opentalk1.netlify.app/",
-      // github: "https://github.com/satvik9373/lms-websitee",
-      alt: "Affiliate Marketing and earning Website",
+      name: "Breakout Game",
+      description: "A classic Breakout game reimagined with advanced 3D-style animations, vibrant visual themes, and smooth paddle-ball mechanics.",
+      image: "images/projects/breakout_game.png",
+      tags: ["javascript", "game", "ui", "framer"],
+      liveview: "https://break-out-game-git-main-samernassimbehery-9083s-projects.vercel.app/",
+      alt: "Breakout Game Preview",
     },
   ],
   aM = {
@@ -37671,6 +37639,10 @@ const oM = [
       '<div class="work-item-tag" style="background: #FFB800;">JavaScript</div>',
     react:
       '<div class="work-item-tag" style="background: #21BAEB;">React js</div>',
+    angular:
+      '<div class="work-item-tag" style="background: #DD0031;">Angular</div>',
+    firebase:
+      '<div class="work-item-tag" style="background: #FFCA28; color: #333;">Firebase</div>',
     mongodb:'<div class="work-item-tag" style="background: #4fe461;">MongoDB</div>',
     googleAuth:'<div class="work-item-tag" style="background: #4fe461;">Google Auth</div>',
     express:
@@ -39724,97 +39696,43 @@ class bM {
             }),
         }),
         new Ln({
-          element: this.domElements.cards[2],
+          element: this.domElements.cards[Math.floor(this.domElements.cards.length / 2)] || this.domElements.aboutSection,
           direction: "down",
           f: () => {
-            P.to(this.domElements.cards[0], {
-              y: 0,
-              opacity: 1,
-              duration: 0.85,
-            }),
-              P.to(this.domElements.cards[1], {
+            this.domElements.cards.forEach((card, index) => {
+              P.to(card, {
                 y: 0,
                 opacity: 1,
-                duration: 0.75,
-              }),
-              P.to(this.domElements.cards[2], {
-                y: 0,
-                opacity: 1,
-                duration: 0.65,
-              }),
-              P.to(this.domElements.cards[3], {
-                y: 0,
-                opacity: 1,
-                duration: 0.75,
-              }),
-              P.to(this.domElements.cards[4], {
-                y: 0,
-                opacity: 1,
-                duration: 0.85,
-                onComplete: () => {
+                duration: 0.85 - (index % 3) * 0.1,
+                onComplete: index === this.domElements.cards.length - 1 ? () => {
                   P.delayedCall(0.2, () => {
                     this.addTransitionClass(!0), (this.played = !0);
                   });
-                },
+                } : null
               });
+            });
           },
           setup: () => {
-            this.addTransitionClass(!1),
-              P.to(this.domElements.cards[0], {
-                y: 100,
-                opacity: 0,
-                duration: 0,
-              }),
-              P.to(this.domElements.cards[1], {
-                y: 100,
-                opacity: 0,
-                duration: 0,
-              }),
-              P.to(this.domElements.cards[2], {
-                y: 100,
-                opacity: 0,
-                duration: 0,
-              }),
-              P.to(this.domElements.cards[3], {
-                y: 100,
-                opacity: 0,
-                duration: 0,
-              }),
-              P.to(this.domElements.cards[4], {
+            this.addTransitionClass(!1);
+            this.domElements.cards.forEach((card) => {
+              P.to(card, {
                 y: 100,
                 opacity: 0,
                 duration: 0,
               });
+            });
           },
           reset: () => {
-            P.to(this.domElements.cards[0], {
-              y: 0,
-              opacity: 1,
-              duration: 0,
-            }),
-              P.to(this.domElements.cards[1], {
+            this.domElements.cards.forEach((card, index) => {
+              P.to(card, {
                 y: 0,
                 opacity: 1,
                 duration: 0,
-              }),
-              P.to(this.domElements.cards[2], {
-                y: 0,
-                opacity: 1,
-                duration: 0,
-              }),
-              P.to(this.domElements.cards[3], {
-                y: 0,
-                opacity: 1,
-                duration: 0,
-              }),
-              P.to(this.domElements.cards[4], {
-                y: 0,
-                opacity: 1,
-                duration: 0,
-                onComplete: () => {
+                onComplete: index === this.domElements.cards.length - 1 ? () => {
                   this.addTransitionClass(!0), (this.played = !0);
-                },
+                } : null
               });
+            });
           },
         }),
       ]);
@@ -39868,7 +39786,8 @@ class MM {
       (this.world = this.experience.world),
       (this.sizes = this.experience.sizes),
       this.resources.on("ready", () => {
-        (this.transition = new sM()),
+        (this.hoverIcon = new uM()),
+          (this.transition = new sM()),
           (this.scrollIcon = new qu(0)),
           (this.scrollScrollIcon = new qu(1)),
           (this.landingPage = new nM()),
@@ -39889,8 +39808,7 @@ class MM {
           (this.contact = {}),
           (this.contact.form = new yM()),
           (this.contact.animationEvents = new xM()),
-          (this.header = new dM()),
-          (this.hoverIcon = new uM());
+          (this.header = new dM());
       }),
       (this.intro = new vM());
   }
@@ -42080,9 +41998,9 @@ class EM {
       {
         name: "mouseWheel",
         files: [
-          "/sounds/mouse-wheel-0.mp3",
-          "/sounds/mouse-wheel-1.mp3",
-          "/sounds/mouse-wheel-2.mp3",
+          "sounds/mouse-wheel-0.mp3",
+          "sounds/mouse-wheel-1.mp3",
+          "sounds/mouse-wheel-2.mp3",
         ],
         group: "landing",
         volume: 0.6,
@@ -42090,47 +42008,47 @@ class EM {
       {
         name: "bubble",
         files: [
-          "/sounds/bubble-0.mp3",
-          "/sounds/bubble-1.mp3",
-          "/sounds/bubble-2.mp3",
+          "sounds/bubble-0.mp3",
+          "sounds/bubble-1.mp3",
+          "sounds/bubble-2.mp3",
         ],
         group: "lab",
         volume: 0.2,
       },
       {
         name: "roomAmbience",
-        files: ["/sounds/room-ambience.mp3"],
+        files: ["sounds/room-ambience.mp3"],
         group: "landing",
         volume: 0.1,
         html5: !0,
       },
       {
         name: "notification",
-        files: ["/sounds/notification.mp3"],
+        files: ["sounds/notification.mp3"],
         group: "landing",
         volume: 0.25,
       },
       {
         name: "longKeyboard",
-        files: ["/sounds/long-keyboard.mp3"],
+        files: ["sounds/long-keyboard.mp3"],
         group: "landing",
         volume: 0.5,
       },
       {
         name: "labAmbience",
-        files: ["/sounds/lab-ambience.mp3"],
+        files: ["sounds/lab-ambience.mp3"],
         group: "lab",
         volume: 0.15,
       },
       {
         name: "waterSplash",
-        files: ["/sounds/water-splash.mp3"],
+        files: ["sounds/water-splash.mp3"],
         group: "lab",
         volume: 0.3,
       },
       {
         name: "hologram",
-        files: ["/sounds/hologram.mp3"],
+        files: ["sounds/hologram.mp3"],
         group: "lab",
         volume: 0.8,
       },
@@ -42148,37 +42066,37 @@ class EM {
       },
       {
         name: "waterUp",
-        files: ["/sounds/water-up.mp3"],
+        files: ["sounds/water-up.mp3"],
         group: "general",
         volume: 0.5,
       },
       {
         name: "gasp",
-        files: ["/sounds/gasp.mp3"],
+        files: ["sounds/gasp.mp3"],
         group: "general",
         volume: 0.2,
       },
       {
         name: "buttonClick",
-        files: ["/sounds/button-click.mp3"],
+        files: ["sounds/button-click.mp3"],
         group: "general",
         volume: 1,
       },
       {
         name: "chairDown",
-        files: ["/sounds/chair-down.mp3"],
+        files: ["sounds/chair-down.mp3"],
         group: "landing",
         volume: 0.4,
       },
       {
         name: "chairImpact",
-        files: ["/sounds/chair-impact.mp3"],
+        files: ["sounds/chair-impact.mp3"],
         group: "landing",
         volume: 1,
       },
       {
         name: "bird",
-        files: ["/sounds/bird.mp3"],
+        files: ["sounds/bird.mp3"],
         group: "landing",
         volume: 0.6,
       },
