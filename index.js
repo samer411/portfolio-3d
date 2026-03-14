@@ -33950,10 +33950,11 @@ class _w {
       (this.leftDesktopIntervals = []));
   }
   update() {
-    this.experience.ui.landingPage.visible &&
-      (this.animations.actions.current._clip.name === "idle" ||
-        this.animations.actions.current._clip.name === "left-desktop-action") &&
-      this.mouse.updateMouseSync();
+    if (this.experience.ui.landingPage && this.experience.ui.landingPage.visible && this.animations.actions.current && this.animations.actions.current._clip) {
+      if (this.animations.actions.current._clip.name === "idle" || this.animations.actions.current._clip.name === "left-desktop-action") {
+        this.mouse.updateMouseSync();
+      }
+    }
   }
 }
 class yw {
@@ -34178,14 +34179,17 @@ class vw {
       (this.model.hoverIcon = "pointer"),
       (this.model.onClick = () => this.clickEvent()),
       window.requestAnimationFrame(() => {
-        const e = this.experience.ui.menu.main;
-        e.on("open", () => {
-          (this.model.hoverIcon = null), (this.model.onClick = null);
-        }),
-          e.on("hide", () => {
-            (this.model.hoverIcon = "pointer"),
-              (this.model.onClick = () => this.clickEvent());
-          });
+        const u = this.experience.ui;
+        if (u && u.menu && u.menu.main) {
+          const e = u.menu.main;
+          e.on("open", () => {
+            (this.model.hoverIcon = null), (this.model.onClick = null);
+          }),
+            e.on("hide", () => {
+              (this.model.hoverIcon = "pointer"),
+                (this.model.onClick = () => this.clickEvent());
+            });
+        }
       });
   }
   clickEvent() {
@@ -37966,7 +37970,7 @@ class uM extends Ai {
       (this.intro = this.experience.ui.intro),
       this.setupDefault(),
       this.setCursorLeavesDoc(),
-      this.setHoverColorSwitchHeight(),
+      this.scroll && this.scroll.aboutContainer && this.setHoverColorSwitchHeight(),
       this.applyEventListeners(),
       this.applyColorSwitchEventListeners(),
       this.sizes.touch
@@ -38113,10 +38117,12 @@ class uM extends Ai {
         (document.querySelector("body").style.cursor = ""));
   }
   setHoverColorSwitchHeight() {
-    this.domElements.colorSwitchContainer.style.height =
-      this.scroll.aboutContainer.height +
-      window.innerHeight * (this.sizes.portrait ? 0.03 : 0.15) +
-      "px";
+    if (this.scroll && this.scroll.aboutContainer && this.domElements.colorSwitchContainer) {
+      this.domElements.colorSwitchContainer.style.height =
+        this.scroll.aboutContainer.height +
+        window.innerHeight * (this.sizes.portrait ? 0.03 : 0.15) +
+        "px";
+    }
   }
   resize() {
     this.setHoverColorSwitchHeight();
@@ -39470,23 +39476,12 @@ class vM {
     });
     (this.experience = new ye()),
       (this.resources = this.experience.resources),
-      this.resources.on("ready", () => {
-        (this.resourcesReady = !0),
-          (this.room = this.experience.world.landingPage.room),
-          (this.landingPage = this.experience.ui.landingPage),
-          (this.gestures = this.experience.gestures),
-          (this.character = this.experience.world.character),
-          (this.sounds = this.experience.sounds),
-          (this.tones = this.experience.world.landingPage.tones),
-          (this.hoverIcon = this.experience.ui.hoverIcon),
-          (this.soundButton = this.experience.ui.soundButton),
-          P.delayedCall(1.2, () => {
-            this.close(),
-              this.clicked &&
-                localStorage.getItem("soundActive") != "false" &&
-                this.soundButton.activate(!1);
-          });
-      }),
+    this.resources.on("ready", () => {
+      this.resourcesReady = !0;
+      P.delayedCall(1.2, () => {
+        this.close();
+      });
+    });
       localStorage.getItem("soundActive") != "false"
         ? this.setupClickCTA()
         : this.killAnimation(),
@@ -39500,9 +39495,9 @@ class vM {
         this.resourcesReady &&
           this.clicked &&
           localStorage.getItem("soundActive") != "false" &&
-          this.soundButton.activate(!1),
+          this.experience.ui.soundButton && this.experience.ui.soundButton.activate(!1),
         event.preventDefault(),
-        this.sounds && this.sounds.playRoomAmbience());
+        this.experience.sounds && this.experience.sounds.playRoomAmbience && this.experience.sounds.playRoomAmbience());
     });
   }
   setupClickCTA() {
@@ -39558,40 +39553,49 @@ class vM {
     setTimeout(() => (this.clickCTAVisible = !1)),
       this.experience.sizes.touch ||
         document.querySelector("body").classList.remove("pointer"),
-      document.getElementById("hover-icon").classList.remove("clickCTA"),
+      document.getElementById("hover-icon") && document.getElementById("hover-icon").classList.remove("clickCTA"),
       this.killAnimation();
   }
   close() {
-    this.closed ||
-      ((this.closed = !0),
-      this.experience.sizes.touch ||
-        (this.domElements.container.style.cursor = "unset"),
-      P.to(this.hoverIcon.domElements.icon, {
-        scale: 1,
-        duration: 0.3,
-        delay: 0.5,
-      }),
-      this.hoverIcon.setupDefault(),
-      this.playIntro());
+    if (this.closed) return;
+    this.closed = !0;
+    this.experience.sizes.touch || (this.domElements.container.style.cursor = "unset");
+    const h = this.experience.ui.hoverIcon;
+    if (h && h.domElements) {
+        P.to(h.domElements.icon, {
+            scale: 1,
+            duration: 0.3,
+            delay: 0.5,
+        });
+        h.setupDefault && h.setupDefault();
+    }
+    this.playIntro();
+    
+    const sb = this.experience.ui.soundButton;
+    if (this.clicked && localStorage.getItem("soundActive") != "false" && sb && sb.activate) {
+        sb.activate(!1);
+    }
   }
   playIntro() {
     P.delayedCall(
       0.1,
-      () => (this.domElements.container.style.backgroundColor = "transparent")
+      () => (this.domElements.container && (this.domElements.container.style.backgroundColor = "transparent"))
     ),
       P.to(this.domElements.logo, {
         scale: 0,
         duration: 0.6,
         ease: yn.easeIn.config(2.5),
-      }),
-      this.landingPage.playOpeningAnimation(0.62),
-      this.room.bounceIn(0.45, !0),
-      this.character.animations.playIntroAnimation(),
-      P.delayedCall(this.parameters.timeTillFinish, () => this.finish()),
-      this.clicked && this.sounds.playRoomAmbience();
+      });
+    const lp = this.experience.ui.landingPage;
+    const w = this.experience.world;
+    lp && lp.playOpeningAnimation && lp.playOpeningAnimation(0.62);
+    w && w.landingPage && w.landingPage.room && w.landingPage.room.bounceIn && w.landingPage.room.bounceIn(0.45, !0);
+    w && w.character && w.character.animations && w.character.animations.playIntroAnimation && w.character.animations.playIntroAnimation();
+    P.delayedCall(this.parameters.timeTillFinish, () => this.finish());
+    this.clicked && this.experience.sounds && this.experience.sounds.playRoomAmbience && this.experience.sounds.playRoomAmbience();
   }
   finish() {
-    P.fromTo(
+    this.domElements.overlay && P.fromTo(
       this.domElements.overlay,
       {
         opacity: 0,
@@ -39601,8 +39605,8 @@ class vM {
         duration: 1,
       }
     ),
-      this.domElements.container.classList.add("hide"),
-      this.gestures.init();
+      this.domElements.container && this.domElements.container.classList.add("hide"),
+      this.experience.gestures && this.experience.gestures.init && this.experience.gestures.init();
   }
 }
 class bM {
@@ -39780,7 +39784,7 @@ class wM {
   }
 }
 class MM {
-  constructor() {
+   constructor() {
     (this.experience = new ye()),
       (this.resources = this.experience.resources),
       (this.world = this.experience.world),
@@ -39797,6 +39801,7 @@ class MM {
           (this.menu = {}),
           (this.menu.main = new fM()),
           (this.menu.items = new gM()),
+          (this.header = new dM()),
           (this.about = {}),
           (this.about.render = new hM()),
           (this.about.animations = new mM()),
@@ -39807,8 +39812,7 @@ class MM {
           (this.work.scrollEvents = new bM()),
           (this.contact = {}),
           (this.contact.form = new yM()),
-          (this.contact.animationEvents = new xM()),
-          (this.header = new dM());
+          (this.contact.animationEvents = new xM());
       }),
       (this.intro = new vM());
   }
@@ -42302,10 +42306,10 @@ class ye {
   }
   update() {
     this.camera.update(),
-      this.world.update(),
-      this.renderer.update(),
-      this.raycaster.update(),
-      this.ui.update();
+      this.world && this.world.update(),
+      this.renderer && this.renderer.update(),
+      this.raycaster && this.raycaster.update(),
+      this.ui && this.ui.update && this.ui.update();
   }
 }
 new ye(document.getElementById("main-canvas"));
