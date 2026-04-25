@@ -37672,7 +37672,7 @@ const oM = [
     wordpress: '<div class="work-item-tag" style="background: #21759B;">WordPress</div>',
     woocommerce: '<div class="work-item-tag" style="background: #96588A;">WooCommerce</div>',
     woodmart: '<div class="work-item-tag" style="background: #E85A00;">WoodMart</div>',
-    seo: '<div class="work-item-tag" style="background: #34a853;">SEO</div>',
+    SEO: '<div class="work-item-tag" style="background: #34a853;">SEO</div>',
   };
 class lM {
   constructor() {
