@@ -37620,7 +37620,7 @@ const oM = [
   {
       id: 0,
       name: "3dworld Shop",
-      description: "I developed 3D World Shop, a niche e-commerce platform for 3D printing products, delivering a structured catalog, smooth navigation, and a responsive user experience optimized for technical audiences.",
+      description: "Built a 3D printing e-commerce platform with a clean UI, structured catalog, and optimized user experience.",
       image: "images/projects/Default-Social-Share-Image.jpg",
       tags: ["wordpress", "woocommerce", "woodmart", "SEO"],
       liveview: "https://3dworld-shop.com/",
@@ -37669,6 +37669,10 @@ const oM = [
     tailwind: '<div class="work-item-tag" style="background:rgb(234, 248, 73);">Tailwind</div>',
     game: '<div class="work-item-tag" style="background: #e86ef0;">Game</div>',
     framer: '<div class="work-item-tag" style="background: #e86ef0;">Framer</div>',
+    wordpress: '<div class="work-item-tag" style="background: #21759B;">WordPress</div>',
+    woocommerce: '<div class="work-item-tag" style="background: #96588A;">WooCommerce</div>',
+    woodmart: '<div class="work-item-tag" style="background: #E85A00;">WoodMart</div>',
+    seo: '<div class="work-item-tag" style="background: #34a853;">SEO</div>',
   };
 class lM {
   constructor() {
