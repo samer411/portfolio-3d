@@ -37618,7 +37618,7 @@ class rM {
 }
 const oM = [
     {
-      id: 0,
+      id: 2,
       name: "Coca Cola",
       description: "A premium digital experience for Coca Cola, featuring seamless interactions and a high-performance modern web interface.",
       image: "images/projects/cocacola_logo.png",
@@ -37633,6 +37633,15 @@ const oM = [
       image: "images/projects/breakout_game.png",
       tags: ["javascript", "game", "ui", "framer"],
       liveview: "https://break-out-game-git-main-samernassimbehery-9083s-projects.vercel.app/",
+      alt: "Breakout Game Preview",
+    },
+    {
+      id: 0,
+      name: "3dworld Shop",
+      description: "I developed 3D World Shop, a niche e-commerce platform dedicated to 3D printing technologies and supplies. The platform delivers a streamlined shopping experience for both beginners and professionals, offering products such as 3D printers, scanners, filaments, resins, and specialized tools for industries like dental and jewelry.",
+      image: "images/projects/Default-Social-Share-Image.jpg",
+      tags: ["wordpress", "woocommerce", "woodmart", "SEO"],
+      liveview: "https://3dworld-shop.com/",
       alt: "Breakout Game Preview",
     },
   ],
