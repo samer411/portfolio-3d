@@ -37638,11 +37638,11 @@ const oM = [
     {
       id: 0,
       name: "3dworld Shop",
-      description: "I developed 3D World Shop, a niche e-commerce platform dedicated to 3D printing technologies and supplies. The platform delivers a streamlined shopping experience for both beginners and professionals, offering products such as 3D printers, scanners, filaments, resins, and specialized tools for industries like dental and jewelry.",
+      description: "I developed 3D World Shop, a niche e-commerce platform for 3D printing products, delivering a structured catalog, smooth navigation, and a responsive user experience optimized for technical audiences.",
       image: "images/projects/Default-Social-Share-Image.jpg",
       tags: ["wordpress", "woocommerce", "woodmart", "SEO"],
       liveview: "https://3dworld-shop.com/",
-      alt: "Breakout Game Preview",
+      alt: "3D World Shop Preview",
     },
   ],
   aM = {
