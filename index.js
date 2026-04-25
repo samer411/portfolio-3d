@@ -37617,25 +37617,7 @@ class rM {
   }
 }
 const oM = [
-    {
-      id: 2,
-      name: "Coca Cola",
-      description: "A premium digital experience for Coca Cola, featuring seamless interactions and a high-performance modern web interface.",
-      image: "images/projects/cocacola_logo.png",
-      tags: ["angular", "firebase", "javascript", "ui", "freelance"],
-      liveview: "https://coca-zeta.vercel.app/",
-      alt: "Coca Cola Project Preview",
-    },
-    {
-      id: 1,
-      name: "Breakout Game",
-      description: "A classic Breakout game reimagined with advanced 3D-style animations, vibrant visual themes, and smooth paddle-ball mechanics.",
-      image: "images/projects/breakout_game.png",
-      tags: ["javascript", "game", "ui", "framer"],
-      liveview: "https://break-out-game-git-main-samernassimbehery-9083s-projects.vercel.app/",
-      alt: "Breakout Game Preview",
-    },
-    {
+  {
       id: 0,
       name: "3dworld Shop",
       description: "I developed 3D World Shop, a niche e-commerce platform for 3D printing products, delivering a structured catalog, smooth navigation, and a responsive user experience optimized for technical audiences.",
@@ -37644,6 +37626,25 @@ const oM = [
       liveview: "https://3dworld-shop.com/",
       alt: "3D World Shop Preview",
     },
+    {
+      id: 1,
+      name: "Coca Cola",
+      description: "A premium digital experience for Coca Cola, featuring seamless interactions and a high-performance modern web interface.",
+      image: "images/projects/cocacola_logo.png",
+      tags: ["angular", "firebase", "javascript", "ui", "freelance"],
+      liveview: "https://coca-zeta.vercel.app/",
+      alt: "Coca Cola Project Preview",
+    },
+    {
+      id: 2,
+      name: "Breakout Game",
+      description: "A classic Breakout game reimagined with advanced 3D-style animations, vibrant visual themes, and smooth paddle-ball mechanics.",
+      image: "images/projects/breakout_game.png",
+      tags: ["javascript", "game", "ui", "framer"],
+      liveview: "https://break-out-game-git-main-samernassimbehery-9083s-projects.vercel.app/",
+      alt: "Breakout Game Preview",
+    },
+    
   ],
   aM = {
     html: '<div class="work-item-tag" style="background: white; border: 1px solid #7C8594; color: #7C8594">HTML</div>',
